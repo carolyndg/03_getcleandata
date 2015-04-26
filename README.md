@@ -17,14 +17,37 @@ The version of the data used for this analysis was downloaded from here
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
 
-The file run_anlaysis.R contains the anlaysis. A summary is as follows
+The file run_anlaysis.R contains the anlaysis. the code works as follows:
 
- The data initially comes as a training and a test set. 
- These are merged into one data set.
- 
- The data is simplified by extracting only the means and standard deviations for each measurement. 
- 
+The data is loaded from the unzipped folder which is in the directory this script is run from.
+It comes as 8 files:
+#test data
+ X_test.txt
+ Y_test.txt
+ subject_test.txt
+
+#training data
+ X_train.txt
+ Y_train.txt
+ subject_train.txt
+
+#labels
+  features.txt
+  activity_labels.txt
+
+The data initially comes as a training and a test set, which are split into measurements (y), activity (x) and subject (subject)
+I first merge the test and training together for each type of data
+Then the subject, activity and measurements together. 
+
+Column names are replaced with a meaningful text name
+
+The data is simplified by extracting only the means and standard deviations for each measurement. 
+
 The data descirbes six acivities that are coded with numbers. These are replaced with the full name of the activity. 
 
 The data is then summarised with dplyr into the average of each variable for each activity and subject. 
+The group_by function groups the data by acitivity and subject
+We then wish to get the mean of many columns, so we use summarise_each()
+
+The data is then written to file
 
